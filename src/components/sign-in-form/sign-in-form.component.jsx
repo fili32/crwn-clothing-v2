@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import "./sign-in-form.styles.scss";
@@ -16,6 +16,7 @@ const formInputsInitial = {
 const SignInForm = () => {
   const [formInputs, setFormInputs] = useState(formInputsInitial);
   const { email, password } = formInputs;
+
   const resetFormInputs = () => {
     setFormInputs(formInputsInitial);
   };
@@ -26,20 +27,26 @@ const SignInForm = () => {
 
   const signInWithEmailAndPasswordHandler = async (event) => {
     event.preventDefault();
-    if (!email || !password) return;
-    const auth = getAuth();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const { user } = await signInWithEmailAndPassword(email, password);
       alert("welcome, you have successfuly sign in!");
       resetFormInputs();
     } catch (error) {
-      alert(error.message);
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("incorrect password for email");
+          break;
+        case "auth/user-not-found":
+          alert("no user associated with this email");
+          break;
+        default:
+          console.log(error);
+      }
     }
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   return (
