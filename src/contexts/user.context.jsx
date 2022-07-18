@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect, useTransition } from "react";
+import { useState, createContext, useEffect } from "react";
 
 import {
   createUserDocumentFromAuth,
@@ -13,7 +13,11 @@ export const UserContext = createContext({
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const value = { currentUser, setCurrentUser };
+
+  const value = {
+    currentUser,
+    setCurrentUser,
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {

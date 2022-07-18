@@ -1,0 +1,17 @@
+.cart-item-container {
+  padding: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.item-image {
+  width: 55px;
+  height: auto;
+}
+
+.item-description {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
