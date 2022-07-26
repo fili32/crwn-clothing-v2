@@ -12,7 +12,7 @@ import { CartItemsContext } from "../../contexts/cart-items.context";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { isOpen, cartItems, toggleCart } = useContext(CartItemsContext);
+  const { isOpen, cartItems } = useContext(CartItemsContext);
 
   return (
     <Fragment>
