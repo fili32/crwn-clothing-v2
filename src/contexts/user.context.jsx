@@ -24,7 +24,6 @@ export const UserProvider = ({ children }) => {
       if (user) {
         createUserDocumentFromAuth(user);
       }
-      console.log("[use.context]currentUser", currentUser);
       setCurrentUser(user);
     });
 
